@@ -68,10 +68,12 @@ return [
 
         'sqlsrv' => [
             'driver' => 'sqlsrv',
-            'host' => env('103.14.14.118'),
-            'database' => env('SqlServer'),
-            'username' => env('sa'),
-            'password' => env('kuradb'),
+            'host' => 'DESKTOP-VDDMQI8\SQLEXPRESS',
+            //'host' => '127.0.0.1',
+            //'port' => '1433',
+            'database' => 'SEIBOU_2014',
+            'username' => 'sa',
+            'password' => 'sa',
             'charset' => 'utf8',
             'prefix' => '',
         ],
