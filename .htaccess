@@ -1,4 +1,10 @@
 <IfModule mod_rewrite.c>
+    # Protect .env
+    <Files .env>
+    Order Allow,Deny
+    Deny from all
+    </Files>
+    
     <IfModule mod_negotiation.c>
         Options -MultiViews
     </IfModule>
