@@ -15,7 +15,7 @@ class TestController extends Controller
 {
     public function index()
     {
-        $results = DB::table('M_商品')->get();
+        $results = DB::connection('sqlsrv')->select('SELECT * FROM M_商品');
         echo '<pre>';
         print_r($results);
         die;

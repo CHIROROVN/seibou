@@ -66,14 +66,14 @@ return [
             'sslmode' => 'prefer',
         ],
 
-        'sqlserver' => [
+        'sqlsrv' => [
             'driver' => 'sqlsrv',
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '1433'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'host' => env('103.14.14.118'),
+            'database' => env('SqlServer'),
+            'username' => env('sa'),
+            'password' => env('kuradb'),
             'charset' => 'utf8',
+            'prefix' => '',
         ],
 
     ],
