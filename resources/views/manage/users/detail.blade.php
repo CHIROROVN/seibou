@@ -10,40 +10,58 @@
         <tbody>
           <tr>
             <td class="col-title">氏名</td>
-            <td>山田　花子</td>
+            <td>
+              {{$user->u_name}}
+            </td>
           </tr>
           <tr>
             <td class="col-title">ログインID</td>
-            <td>yamada1</td>
+            <td>
+              {{$user->u_login}}
+            </td>
           </tr>
           <tr>
             <td class="col-title">パスワード</td>
-            <td>yamada1</td>
+            <td>
+              {{$user->u_passwd}}
+            </td>
           </tr>
           <tr>
             <td class="col-title">操作権限</td>
             <td>
-              「お知らせ」管理<br />
-              「営業日カレンダー」管理<br />
-              ユーザー管理
+            @if($user->u_power1 != null)
+              ・「お知らせ」管理
+              @endif
+              @if($user->u_power2 != null)<br>
+              ・「営業日カレンダー」管理
+              @endif
+              @if($user->u_power3 != null)<br>
+              ・ユーザー管理
+               @endif
             </td>
           </tr>
           <tr>
             <td class="col-title">有効／無効</td>
-            <td>有効</td>
+            <td>
+              @if($user->u_free1 != null)
+              有効
+              @else
+              無効
+              @endif
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="row mar-bottom30">
       <div class="col-md-12 text-center">
-        <input onclick="location.href='manager_change.html'" value="変更する" type="button" class="btn btn-sm btn-primary">
-        <input onclick="location.href='manager_delete_cnf.html'" value="削除する" type="button" class="btn btn-sm btn-primary mar-left40">
+        <input onclick="location.href='{{route('manage.users.change',$user->u_id)}}'" value="変更する" type="button" class="btn btn-sm btn-primary">
+        <input onclick="location.href='{{route('manage.users.delete_cnf', $user->u_id)}}'" value="削除する" type="button" class="btn btn-sm btn-primary mar-left40">
       </div>
     </div>
     <div class="row">
       <div class="col-md-12 text-center">
-        <input onclick="location.href='manager_list.html'" value="登録済みユーザー一覧に戻る" type="button" class="btn btn-sm btn-primary">
+        <input onclick="location.href='{{route('manage.users.index')}}'" value="登録済みユーザー一覧に戻る" type="button" class="btn btn-sm btn-primary">
       </div>
     </div>
   </div>

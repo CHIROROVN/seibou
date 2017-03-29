@@ -42,11 +42,13 @@ return [
     //Users
     'error_u_login_required'                    => 'ログインIDを入力してください。',
     'error_u_passwd_required'                   => 'パスワードを入力してください。',
+    'error_u_login_unique'                      => 'ログインIDが存在しました。',
+    'error_u_name_required'                     => 'あなたの名前を入力してください。',
 
     //Change password
     'error_old_pwd_required'                    => '現在のパスワードを入力してください。',
     'error_new_pwd_required'                    => '新しいパスワードを入力してください。',
-    'check_hashed_pass'              => '現在のパスワードが正しくありません。',
+    'check_hashed_pass'                         => '現在のパスワードが正しくありません。',
     'error_conf_new_pwd_same'                   => '新しいパスワードと確認の新しいパスワードが同じでなければなりません。',
 
     ];

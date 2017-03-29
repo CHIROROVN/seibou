@@ -19,25 +19,32 @@
               <td class="col-title" align="center">ログインID</td>
               <td class="col-title" align="center">権限</td>
             </tr>
+
             @if( count($users) > 0 )
               @foreach ( $users as $user )
+              <tr>
                 <td align="center">
                 <input onclick="location.href='{{route('manage.users.detail',$user->u_id)}}'" value="詳細・変更・削除" type="button" class="btn btn-xs btn-primary">
-              </td>
-              <td align="center">○</td>
-              <td>山田　太郎</td>
-              <td>{{$user->u_login}}</td>
-              <td>
-              @if( $user->u_power1 == 1 )
-              ・「お知らせ」管理<br>
-              @endif
-              @if ( $user->u_power2 == 1 )
-                  ・「営業日カレンダー」管理<br>
-              @endif
-              @if ( $user->u_power3 == 1 )
-              ・「営業日カレンダー」管理 
-              @endif
-              </td>
+                </td>
+                @if($user->u_free1 == 1)
+                <td align="center" class="text-orange">×</td>
+                @else
+                <td align="center">○</td>
+                @endif
+                <td>{{$user->u_name}}</td>
+                <td>{{$user->u_login}}</td>
+                <td>
+                @if( $user->u_power1 == 1 )
+                 ・「お知らせ」管理<br>
+                @endif
+                @if ( $user->u_power2 == 1 )
+                 ・「営業日カレンダー」管理<br>
+                @endif
+                @if ( $user->u_power3 == 1 )
+                ・ユーザー管理 
+                @endif
+                </td>
+              </tr>
               @endforeach
             @else
             <tr><td colspan="5" style="text-align: center;">該当するデータがありません。</td></tr>

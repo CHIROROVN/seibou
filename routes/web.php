@@ -38,6 +38,9 @@ Route::group(['prefix' => 'front', 'namespace' => 'Frontend'], function ()
     //history
     Route::get('/history', ['as' => 'front.history.index', 'uses' => 'HistoryController@index']);
     Route::get('/history/detail/{id}', ['as' => 'front.history.detail', 'uses' => 'HistoryController@getDetail']);
+    Route::get('/history/cancel', ['as' => 'front.history.cancel', 'uses' => 'HistoryController@getCancel']);
+    Route::get('/history/cancel/end', ['as' => 'front.history.cancel.end', 'uses' => 'HistoryController@getCancelEnd']);
+    Route::get('/history/cancel-detail/{id}', ['as' => 'front.history.cancel_detail', 'uses' => 'HistoryController@getCancelDetail']);
 
     //Delivery
     Route::get('/delivery', ['as' => 'front.delivery.index', 'uses' => 'DeliveryController@index']);
@@ -78,12 +81,19 @@ Route::group(['prefix' => 'manage', 'namespace' => 'Backend'], function () {
     Route::post('/login', ['as' => 'manage.users.login', 'uses' => 'LoginController@postLogin']);
     Route::get('/logout', ['as' => 'manage.users.logout', 'uses' => 'LoginController@logout']);
 	
-	Route::get('/users', ['as' => 'manage.users.index', 'uses' => 'ManageController@index']);
+    Route::get('/users', ['as' => 'manage.users.index', 'uses' => 'ManageController@index']);
     Route::get('/users/regist', ['as' => 'manage.users.regist', 'uses' => 'ManageController@regist']);
     Route::post('/users/regist', ['as' => 'manage.users.regist', 'uses' => 'ManageController@postRegist']);
+    Route::get('/users/regist_cnf', ['as' => 'manage.users.regist_cnf', 'uses' => 'ManageController@registCnf']);
+    Route::get('/users/regist_save', ['as' => 'manage.users.regist_save', 'uses' => 'ManageController@postRegistCnf']);
+
     Route::get('/users/change/{id}', ['as' => 'manage.users.change', 'uses' => 'ManageController@change']);
     Route::post('/users/change/{id}', ['as' => 'manage.users.change', 'uses' => 'ManageController@postChange']);
-    Route::get('/users/del/{id}', ['as' => 'manage.users.del', 'uses' => 'ManageController@del']);
+    Route::get('/users/change_cnf/{id}', ['as' => 'manage.users.change_cnf', 'uses' => 'ManageController@changeCnf']);
+    Route::get('/users/change_save/{id}', ['as' => 'manage.users.change_save', 'uses' => 'ManageController@postChangeCnf']);
+    
+    Route::get('/users/delete_cnf/{id}', ['as' => 'manage.users.delete_cnf', 'uses' => 'ManageController@deleteCnf']);
+    Route::get('/users/delete/{id}', ['as' => 'manage.users.delete', 'uses' => 'ManageController@delete']);
     Route::get('/users/detail/{id}', ['as' => 'manage.users.detail', 'uses' => 'ManageController@detail']);
 
     Route::get('users/change_pwd', ['as' => 'manage.users.change_pwd', 'uses' => 'ManageController@changePwd']);

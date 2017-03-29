@@ -179,7 +179,7 @@ class NoticeController extends BackendController
 
     /*
     |-----------------------------------
-    | post notice change cconfirm
+    | post notice change confirm
     |-----------------------------------
     */
     public function postChangeCnf($id, Request $request) {

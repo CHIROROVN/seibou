@@ -11,6 +11,26 @@ class UserModel
     protected $primaryKey = 'u_id';
     public $timestamps  = false;
 
+        public function Rules()
+    {
+        return array(
+            'u_name'                      => 'required',
+            'u_login'                     => 'required|unique:m_user',
+            'u_passwd'                    => 'required|min:4',
+        );
+    }
+
+    public function Messages()
+    {
+        return array(
+            'u_name.required'             => trans('validation.error_u_name_required'),
+            'u_login.required'            => trans('validation.error_u_login_required'),
+            'u_login.unique'              => trans('validation.error_u_login_unique'),
+            'u_passwd.required'           => trans('validation.error_u_passwd_required'),
+            'u_passwd.min'                => trans('validation.error_u_passwd_min'),
+        );
+    }
+
 
     public function RulesLogin()
     {
@@ -57,6 +77,8 @@ class UserModel
                 );
     }
 
+
+
     //Manage All Users
     public function getAllUser(){
         return DB::table($this->table)->where('last_kind', '<>', DELETE)->orderBy('u_name', 'asc')->get();
@@ -72,6 +94,12 @@ class UserModel
     public function get_by_id($id)
     {
         return DB::table($this->table)->where('u_id', $id)->first();
+    }
+
+    // get u_login by id
+    public function uLoginByID($id)
+    {
+        return DB::table($this->table)->select('u_login')->where('u_id', $id)->first();
     }
 
     //users update
