@@ -6,9 +6,22 @@
       <div class="container">
         <div class="row content content--list">
           <h3>「お知らせ」管理　＞　登録済み「お知らせ」の一覧</h3>
+
+          @if($message = Session::get('danger'))
+              <div id="error" class="message">
+                  <a id="close" title="Message"  href="#" onClick="document.getElementById('error').setAttribute('style','display: none;');">&times;</a>
+                  <span>{{$message}}</span>
+              </div>
+          @elseif($message = Session::get('success'))
+              <div id="success" class="message">
+                  <a id="close" title="Message"  href="javascript::void(0);" onClick="document.getElementById('success').setAttribute('style','display: none;');">&times;</a>
+                  <span>{{$message}}</span>
+              </div>
+          @endif
+          
           <div class="row fl-right mar-bottom">
             <div class="col-md-12">
-              <input onclick="location.href='notice_regist.html'" value="「お知らせ」の新規登録" type="button" class="btn btn-sm btn-primary"/>
+              <input onclick="location.href='{{route('manage.notice.regist')}}'" value="「お知らせ」の新規登録" type="button" class="btn btn-sm btn-primary"/>
             </div>
           </div>
           <table class="table table-bordered table-striped clearfix">
@@ -18,62 +31,25 @@
               <td class="col-title" align="center">タイトル</td>
               <td class="col-title" align="center">情報登録日</td>
             </tr>
-            <tr>
-              <td align="center">
-                <input onclick="location.href='notice_detail.html'" value="詳細・変更・削除" type="button" class="btn btn-xs btn-primary">
-              </td>
-              <td align="center">○</td>
-              <td>新商品について</td>
-              <td>2017/01/20</td>
-            </tr>
-            <tr>
-              <td align="center">
-                <input onclick="location.href='notice_detail.html'" value="詳細・変更・削除" type="button" class="btn btn-xs btn-primary">
-              </td>
-              <td align="center">○</td>
-              <td>新商品について</td>
-              <td>2017/01/19</td>
-            </tr>
-            <tr>
-              <td align="center">
-                <input onclick="location.href='notice_detail.html'" value="詳細・変更・削除" type="button" class="btn btn-xs btn-primary">
-              </td>
-              <td align="center">○</td>
-              <td>新商品について</td>
-              <td>2017/01/18</td>
-            </tr>
-            <tr>
-              <td align="center">
-                <input onclick="location.href='notice_detail.html'" value="詳細・変更・削除" type="button" class="btn btn-xs btn-primary">
-              </td>
-              <td align="center">○</td>
-              <td>新商品について</td>
-              <td>2017/01/01</td>
-            </tr>
-            <tr>
-              <td align="center">
-                <input onclick="location.href='notice_detail.html'" value="詳細・変更・削除" type="button" class="btn btn-xs btn-primary">
-              </td>
-              <td align="center">○</td>
-              <td>新商品について</td>
-              <td>2016/12/24</td>
-            </tr>
-            <tr>
-              <td align="center">
-                <input onclick="location.href='notice_detail.html'" value="詳細・変更・削除" type="button" class="btn btn-xs btn-primary">
-              </td>
-              <td align="center">○</td>
-              <td>運送便の遅れについて</td>
-              <td>2016/12/20</td>
-            </tr>
-            <tr>
-              <td align="center">
-                <input onclick="location.href='notice_detail.html'" value="詳細・変更・削除" type="button" class="btn btn-xs btn-primary">
-              </td>
-              <td align="center" class="text-orange">×</td>
-              <td>年末年始の営業について</td>
-              <td>2016/12/01</td>
-            </tr>
+            @if(count($news) > 0)
+              @foreach($news as $notice)
+                <tr>
+                  <td align="center">
+                    <input onclick="location.href='{{route('manage.notice.detail', $notice->news_id)}}'" value="詳細・変更・削除" type="button" class="btn btn-xs btn-primary">
+                  </td>
+                  @if($notice->news_display == '1')
+                    <td align="center" class="text-orange">×</td>
+                  @else
+                    <td align="center">○</td>
+                  @endif
+                  <td><?php echo nl2br($notice->news_contents); ?></td>
+                  <td>{{formatDate($notice->news_startday, '/')}}</td>
+              </tr>
+              @endforeach
+            @else
+              <tr><td colspan="4" style="text-align: center;">該当するデータがありません。</td></tr>
+            @endif
+            
           </table>
         </div>
       </div>

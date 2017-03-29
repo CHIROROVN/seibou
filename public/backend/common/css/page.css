@@ -204,10 +204,11 @@ h1 {
 
 .form-control--small-xs {
   display: inline;
-  width: 54px;
+  width: 78px;
   height: 25px;
   padding: 3px;
   border-radius:3px;
+  text-align: center;
 }
 
 .form-control--mar-right {
@@ -257,6 +258,8 @@ h1 {
 
 .with-errors {
   color:#d41010;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
@@ -377,7 +380,7 @@ h1 {
 }
 
 #page .content ul {
-  margin-bottom:30px;
+  //margin-bottom:30px;
 }
 
 
@@ -483,25 +486,89 @@ h1 {
 .btn-primary {
   background-color: #5482aa;
 }
+
 li.menuM {
 	font-size: 20px;
 }
 
+.msg-flash {
+  margin-top: 20px;
+}
 
+.form-login {
+  margin-top: 35px;
+}
 
+.message{
+    background-size: 40px 40px;
+    background-image: -moz-linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%, 
+    transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%,
+    transparent 75%, transparent);
+    background-image: -webkit-linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%, 
+    transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%,
+    transparent 75%, transparent);
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%, 
+    transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%,
+    transparent 75%, transparent);
+    box-shadow: 0 0 8px rgba(0,0,0,.3);
+    font:16px 'Open Sans';
+    width: 85%;
+    margin: 20px auto;
+    padding:15px;
+    -moz-animation: bg-animate 5s linear infinite;
+    -webkit-animation: bg-animate 5s linear infinite;
+    -ms-animation: bg-animate 5s linear infinite;
+    animation: bg-animate 5s linear infinite;
+}
 
+.message span{font-weight:600;}
 
+.message #close{float:right; color:inherit; text-decoration:none;}
 
+.message#error{
+    background-color: #ffbaba;
+    border: 1px solid;
+    color: #d6010e;
+    width: 100%;
+}
 
+.message#warning{
+    background-color: #eaaf51;
+    border-left:7px #df8b00 solid;
+    color:#6b6d31;
+}
 
+.message#info{
+    background-color: #4ea5cd;
+    border-left:7px #3b8eb5 solid;
+    color:#beecfc;
+    width: 100%;
+}
 
+.message#success{
+    background-color: #61b832;
+    border-left:7px #55a12c solid;
+    color:#296829;
+    width: 100%;
+}
 
+h2.title {
+  color:  #2471a3;
+}
 
+i.pos-icon {
+  border-right: 1px solid #ddd;
+  padding-right: 5px;
+}
 
+i.table-cap {
+  font-style: normal;
+  padding-left: 5px;
+  font-weight: bold;
+  font-size: 14px;
+}
 
-
-
-
-
-
+.red {
+  color: #C94C5B;
+}
 
