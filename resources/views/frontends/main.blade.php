@@ -64,7 +64,7 @@
               </div>
               <div class="calendar">
                 <div class="frame">
-                  <div><?php echo date('Y'); ?>年<?php echo date('m'); ?>月</div>
+                  <div><?php echo date('Y'); ?>年<?php echo date('m')+0; ?>月</div>
 
                       <?php echo html_entity_decode(calOfMonth()); ?>
 
