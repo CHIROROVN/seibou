@@ -11,7 +11,7 @@
           <table class="table table-bordered table-regist">
             <tbody>
               <tr>
-                <td class="col-title">タイトル <span class="red">(＊)</span></td>
+                <td class="col-title min-width-td">タイトル <span class="red">(＊)</span></td>
                 <td>
                   <input name="news_title" id="news_title" value="{{old('news_title')}}" type="text" class="form-control form-control--large">
                   @if ($errors->first('news_title'))
@@ -22,15 +22,15 @@
               </tr>
               
               <tr>
-                <td class="col-title">情報登録日 <span class="red">(＊)</span></td>
+                <td class="col-title min-width-td">情報登録日 <span class="red">(＊)</span></td>
                 <td>
-                  <select name="year" id="year" class="form-control form-control--small-xs form-control--mar-right">
+                  <select name="year" id="year" class="form-control form-control--small-xs form-control--mar-right dropdown-date">
                     <option value="" @if( old('year') == '' ) selected="" @endif >--年</option>
                     <option value="{{$curr_year}}" @if( old('year') == $curr_year ) selected="" @endif>{{$curr_year}}年</option>
                     <option value="{{$next_year}}" @if( old('year') == $next_year ) selected="" @endif>{{$next_year}}年</option>
                     <option value="{{$next_year_next}}" @if( old('year') == $next_year_next ) selected="" @endif>{{$next_year_next}}年</option>
                   </select>
-                  <select name="month" id="month" class="form-control form-control--small-xs form-control--mar-right">
+                  <select name="month" id="month" class="form-control form-control--small-xs form-control--mar-right dropdown-date">
                     <option value="" @if(old('month') == '') selected="" @endif >--月</option>
                     <option value="01" @if(old('month') == '01') selected="" @endif >01月</option>
                     <option value="02" @if(old('month') == '02') selected="" @endif >02月</option>
@@ -45,7 +45,7 @@
                     <option value="11" @if(old('month') == '11') selected="" @endif >11月</option>
                     <option value="12" @if(old('month') == '12') selected="" @endif >12月</option>
                   </select>
-                  <select name="day" id="day" class="form-control form-control--small-xs">
+                  <select name="day" id="day" class="form-control form-control--small-xs dropdown-date">
                     <option value="" selected="selected">--日</option>
                   </select>
                   @if ($errors->first('year'))
@@ -71,23 +71,23 @@
               </tr>
 
               <tr>
-                <td class="col-title">タイマー</td>
+                <td class="col-title min-width-td">タイマー</td>
                 <td>
                   <div class="col-md-12 mar-bottom">
                     表示開始日：
-                    <select name="year_start" id="year_start" class="form-control form-control--small-xs form-control--mar-right">
+                    <select name="year_start" id="year_start" class="form-control form-control--small-xs form-control--mar-right dropdown-date">
                     <option value="" @if( old('year_start') =='') selected="" @endif>--年</option>
                     <option value="{{$curr_year}}" @if( old('year_start') == $curr_year ) selected="" @endif >{{$curr_year}}年</option>
                     <option value="{{$next_year}}"  @if( old('year_start') == $next_year ) selected="" @endif >{{$next_year}}年</option>
                     <option value="{{$next_year_next}}"  @if( old('year_start') == $next_year_next ) selected="" @endif >{{$next_year_next}}年</option>
                     </select>
-                    <select name="month_start" id="month_start" class="form-control form-control--small-xs form-control--mar-right">
+                    <select name="month_start" id="month_start" class="form-control form-control--small-xs form-control--mar-right dropdown-date">
                         <option value="" @if(old('month_start') == '') selected="" @endif >--月</option>
                         @for($ms=1; $ms<=12; $ms++)
                         <option value="{{sprintf('%02d', $ms)}}" @if(old('month_end') == sprintf('%02d', $ms)) selected="" @endif >{{sprintf('%02d', $ms)}}月</option>
                         @endfor
                     </select>
-                    <select name="day_start" id="day_start" class="form-control form-control--small-xs">
+                    <select name="day_start" id="day_start" class="form-control form-control--small-xs dropdown-date">
                       <option value="" @if(old('day_start') == '') selected="" @endif>--日</option>
                       @for($i=1; $i<=31; $i++)
                         <option value="{{sprintf('%02d',$i)}}" @if(old('day_start') == sprintf('%02d',$i)) selected="" @endif>{{sprintf('%02d',$i)}}日</option>
@@ -97,19 +97,19 @@
                   </div>
                   <div class="col-md-12">
                     表示終了日：
-                    <select name="year_end" id="year_end" class="form-control form-control--small-xs form-control--mar-right">
+                    <select name="year_end" id="year_end" class="form-control form-control--small-xs form-control--mar-right dropdown-date">
                         <option value="" @if( old('year_end') == '' ) selected="" @endif>--年</option>
                         <option value="{{$curr_year}}" @if( old('year_end') == $curr_year ) selected="" @endif >{{$curr_year}}年</option>
                         <option value="{{$next_year}}" @if( old('year_end') == $next_year ) selected="" @endif >{{$next_year}}年</option>
                         <option value="{{$next_year_next}}" @if( old('year_end') == $next_year_next ) selected="" @endif >{{$next_year_next}}年</option>
                     </select>
-                    <select name="month_end" id="month_end" class="form-control form-control--small-xs form-control--mar-right">
+                    <select name="month_end" id="month_end" class="form-control form-control--small-xs form-control--mar-right dropdown-date">
                         <option value="" @if(old('month_end') == '') selected="" @endif >--月</option>
                         @for($me=1; $me<=12; $me++)
                         <option value="{{sprintf('%02d', $me)}}" @if(old('month_end') == sprintf('%02d', $me)) selected="" @endif >{{sprintf('%02d', $me)}}月</option>
                         @endfor
                     </select>
-                    <select name="day_end" id="day_end" class="form-control form-control--small-xs">
+                    <select name="day_end" id="day_end" class="form-control form-control--small-xs dropdown-date">
                       <option value="" @if( old('day_end') == '') selected="" @endif>--日</option>
                       @for($y=1; $y<=31; $y++)
                         <option value="{{sprintf('%02d', $y)}}" @if(old('day_end') == sprintf('%02d',$y)) selected="" @endif>{{sprintf('%02d',$y)}}日</option>
@@ -124,7 +124,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="col-title">表示／非表示</td>
+                <td class="col-title min-width-td">表示／非表示</td>
                 <td>
                   <input name="news_display" value="1" type="checkbox" @if(old('news_display') == '1') checked="" @endif> 一時的にこの「お知らせ」を掲載しない
                 </td>

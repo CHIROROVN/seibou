@@ -110,8 +110,9 @@
   height:23px;
   line-height:23px;
   text-align:center;
-  display: block;
+  display: inline-block;
 }
+
 
 #page-fontend .menu-left th:first-child {
   color:#dc8b8b;

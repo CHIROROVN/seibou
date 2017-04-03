@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FrontendController;
 use App\Http\Models\DeliveryModel;
+use App\Http\Models\ConstantModel;
 use Input;
 use Illuminate\Http\Request;
 use Session;
@@ -14,7 +15,6 @@ class DeliveryController extends FrontendController
     public function __construct()
     {
         parent::__construct();
-        //$this->middleware('auth');
     }
 
     /*
@@ -42,6 +42,8 @@ class DeliveryController extends FrontendController
     */
     public function regist(Request $request)
     {
+        $clsConstant                = new ConstantModel();
+        $data['constant']           = $clsConstant->getWEBMKB();
         if ($request->session()->has('delivery')) $request->session()->forget('delivery');
         $data['breadcrumb']      = 'Web受発注システム　＞　納入先リストの新規登録';
         return view('frontends.delivery.regist', $data);

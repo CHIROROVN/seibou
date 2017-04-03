@@ -10,7 +10,7 @@
           <table class="table table-bordered table-regist">
             <tbody>
               <tr>
-                <td class="col-title">タイトル</td>
+                <td class="col-title min-width-td">タイトル <span class="red">(＊)</span></td>
                 <td>
                   <input name="news_title" id="news_title" value="@if(old('news_title')){{old('news_title')}}@elseif($notice->news_title){{$notice->news_title}}@endif" type="text" class="form-control form-control--large">
                   @if ($errors->first('news_title'))
@@ -20,24 +20,24 @@
                 </td>
               </tr> 
               <tr>
-                <td class="col-title">情報登録日</td>
+                <td class="col-title min-width-td">情報登録日 <span class="red">(＊)</span></td>
                 <td>
-                  <select name="year" id="year" class="form-control form-control--small-xs form-control--mar-right">
+                  <select name="year" id="year" class="form-control form-control--small-xs form-control--mar-right dropdown-date">
                     <option value="" @if(old('year') == '') selected="" @elseif(showYear($notice->news_date)) selected="" @endif>--年</option>
                     @for( $y = $last_year; $y <= $last_year + 4; $y++ )
                       <option value="{{$y}}"  @if(old('year') == $y) selected="" @elseif(showYear($notice->news_date) == $y) selected="" @endif>{{$y}}年</option>
                     @endfor
                   </select>
-                  <select name="month" id="month" class="form-control form-control--small-xs form-control--mar-right">
+                  <select name="month" id="month" class="form-control form-control--small-xs form-control--mar-right dropdown-date">
                     <option value="" @if(old('month') == '') selected="" @elseif( showMonth($notice->news_date) == '' ) selected="" @endif >--月</option>
                     @for( $m=1; $m<=12; $m++ )
                     <option value="{{sprintf('%02d',$m)}}" @if(old('month') == sprintf('%02d',$m)) selected="" @elseif( showMonth($notice->news_date) == $m ) selected="" @endif >{{sprintf('%02d',$m)}}月</option>
                     @endfor
                   </select>
-                  <select name="day" id="day" class="form-control form-control--small-xs">
-                    <option value="" @if(old('day') == '') selected="" @elseif( showDay($notice->news_date) == '' ) selected="" @endif >--日</option>
+                  <select name="day" id="day" class="form-control form-control--small-xs dropdown-date">
+                    <option value="" @if(old('day') == '') selected="" @elseif( dayFromDate($notice->news_date) == '' ) selected="" @endif >--日</option>
                     @for( $d=1; $d<=31; $d++ )
-                    <option value="{{sprintf('%02d',$d)}}" @if(old('day') == sprintf('%02d',$d)) selected="" @elseif( showDay($notice->news_date) == $d ) selected="" @endif >{{sprintf('%02d',$d)}}日</option>
+                    <option value="{{sprintf('%02d',$d)}}" @if(old('day') == sprintf('%02d',$d)) selected="" @elseif( dayFromDate($notice->news_date) == $d ) selected="" @endif >{{sprintf('%02d',$d)}}日</option>
                     @endfor
                   </select>
                   @if ($errors->first('year'))
@@ -55,54 +55,54 @@
                 </td>
               </tr>
               <tr>
-                <td class="col-title">詳細</td>
+                <td class="col-title">詳細 <span class="red">(＊)</span></td>
                 <td>
                 <textarea name="news_contents" id="news_contents" style="height: 320px; width: 100%;">{{$notice->news_contents}}</textarea>
                 </td>
               </tr>
               <tr>
-                <td class="col-title">タイマー</td>
+                <td class="col-title min-width-td">タイマー</td>
                 <td>
                   <div class="col-md-12 mar-bottom">
                     表示開始日：
-                    <select name="year_start" class="form-control form-control--small-xs form-control--mar-right">
+                    <select name="year_start" class="form-control form-control--small-xs form-control--mar-right dropdown-date">
                       <option value="" @if(old('year_start') == '') selected="" @elseif(showYear($notice->news_startday)) selected="" @endif>--年</option>
                     @for( $yt = $last_year; $yt <= $last_year + 4; $yt++ )
                       <option value="{{$yt}}" @if(old('year_start') == $yt) selected="" @elseif(showYear($notice->news_startday) == $yt) selected="" @endif>{{$yt}}年</option>
                     @endfor
                     </select>
-                    <select name="month_start" class="form-control form-control--small-xs form-control--mar-right">
+                    <select name="month_start" class="form-control form-control--small-xs form-control--mar-right dropdown-date">
                       <option value="" @if(old('month_start') == '') selected="" @elseif( showMonth($notice->news_startday) == '' ) selected="" @endif >--月</option>
                     @for( $mt=1; $mt<=12; $mt++ )
                     <option value="{{sprintf('%02d',$mt)}}" @if(old('month_start') == sprintf('%02d',$mt)) selected="" @elseif( showMonth($notice->news_startday) == $mt ) selected="" @endif >{{sprintf('%02d',$mt)}}月</option>
                     @endfor
                     </select>
-                    <select name="day_start" class="form-control form-control--small-xs">
-                      <option value="" @if(old('day_start') == '') selected="" @elseif( showDay($notice->news_startday) == '' ) selected="" @endif >--日</option>
+                    <select name="day_start" class="form-control form-control--small-xs dropdown-date">
+                      <option value="" @if(old('day_start') == '') selected="" @elseif( dayFromDate($notice->news_startday) == '' ) selected="" @endif >--日</option>
                     @for( $ds=1; $ds<=31; $ds++ )
-                    <option value="{{sprintf('%02d',$ds)}}" @if(old('day_start') == sprintf('%02d',$ds)) selected="" @elseif( showDay($notice->news_startday) == $ds ) selected="" @endif >{{sprintf('%02d',$ds)}}日</option>
+                    <option value="{{sprintf('%02d',$ds)}}" @if(old('day_start') == sprintf('%02d',$ds)) selected="" @elseif( dayFromDate($notice->news_startday) == $ds ) selected="" @endif >{{sprintf('%02d',$ds)}}日</option>
                     @endfor
                     </select>
                      から
                   </div>
                   <div class="col-md-12">
                     表示終了日：
-                    <select name="year_end" class="form-control form-control--small-xs form-control--mar-right">
+                    <select name="year_end" class="form-control form-control--small-xs form-control--mar-right dropdown-date">
                       <option value="" @if(old('year_end') == '') selected="" @elseif(showYear($notice->news_startday)) selected="" @endif>--年</option>
                     @for( $ye = $last_year; $ye <= $last_year + 4; $ye++ )
                       <option value="{{$ye}}"  @if(old('year_end') == $ye) selected="" @elseif(showYear($notice->news_endday) == $ye) selected="" @endif>{{$ye}}年</option>
                     @endfor
                     </select>
-                    <select name="month_end" class="form-control form-control--small-xs form-control--mar-right">
+                    <select name="month_end" class="form-control form-control--small-xs form-control--mar-right dropdown-date">
                       <option value="" @if(old('month_end') == '') selected="" @elseif( showMonth($notice->news_startday) == '' ) selected="" @endif >--月</option>
                     @for( $me=1; $me<=12; $me++ )
                     <option value="{{sprintf('%02d',$me)}}" @if(old('month_end') == sprintf('%02d',$me)) selected="" @elseif( showMonth($notice->news_endday) == $me ) selected="" @endif >{{sprintf('%02d',$me)}}月</option>
                     @endfor
                     </select>
-                    <select name="day_end" class="form-control form-control--small-xs">
-                      <option value="" @if(old('day_end') == '') selected="" @elseif( showDay($notice->news_endday) == '' ) selected="" @endif >--日</option>
+                    <select name="day_end" class="form-control form-control--small-xs dropdown-date">
+                      <option value="" @if(old('day_end') == '') selected="" @elseif( dayFromDate($notice->news_endday) == '' ) selected="" @endif >--日</option>
                     @for( $de=1; $de<=31; $de++ )
-                    <option value="{{sprintf('%02d',$de)}}" @if(old('day_end') == sprintf('%02d',$de)) selected="" @elseif( showDay($notice->news_endday) == $de ) selected="" @endif >{{sprintf('%02d',$de)}}日</option>
+                    <option value="{{sprintf('%02d',$de)}}" @if(old('day_end') == sprintf('%02d',$de)) selected="" @elseif( dayFromDate($notice->news_endday) == $de ) selected="" @endif >{{sprintf('%02d',$de)}}日</option>
                     @endfor
                     </select>
                      まで
@@ -131,6 +131,8 @@
         {!! Form::close() !!}
       </div>
     </section>
+
+
     <script>
       tinymce.init({
         selector: '#news_contents',

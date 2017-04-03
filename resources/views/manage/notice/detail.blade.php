@@ -14,15 +14,15 @@
               </tr>
               
               <tr>
-                <td class="col-title">情報登録日</td>
+                <td class="col-title min-width-td">情報登録日</td>
                 <td>{{dateEn2Ja($notice->news_date)}}</td>
               </tr>
               <tr>
-                <td class="col-title">詳細</td>
+                <td class="col-title min-width-td">詳細</td>
                 <td><?php echo nl2br($notice->news_contents);?></td>
               </tr>
               <tr>
-                <td class="col-title">タイマー</td>
+                <td class="col-title min-width-td">タイマー</td>
                 <td>
                     表示開始日： 
                     @if(!empty($notice->news_startday))

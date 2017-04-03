@@ -41,12 +41,14 @@ class LoginController extends BackendController
             'u_login'           => Input::get('u_login'),
             'password'          => Input::get('u_passwd'),
             'last_kind'         => INSERT,
+            'u_free1'           => ENABLE,
         );
         
         $login1 = array(
             'u_login'           => Input::get('u_login'),
             'password'          => Input::get('u_passwd'),
             'last_kind'         => UPDATE,
+            'u_free1'           => ENABLE,
         );
         if (Auth::attempt($login0, false)) {
             return redirect()->route('manage.menu.index');

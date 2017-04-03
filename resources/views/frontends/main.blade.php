@@ -57,131 +57,24 @@
                 <li><a href="{{ route('front.logout') }}">ログアウト</a></li>
               </ul>
             </div>
-            
+
             <div class="navi">
               <div class="title-navi">
                 営業日カレンダー
               </div>
               <div class="calendar">
                 <div class="frame">
-                  <div>2017年2月</div>
-                    <table>
-                      <tbody>
-                      <tr>
-                        <th>日</th>
-                        <th>月</th>
-                        <th>火</th>
-                        <th>水</th>
-                        <th>木</th>
-                        <th>金</th>
-                        <th>土</th>
-                      </tr>
-                      <tr>
-                        <td><span>1</span></td>
-                        <td><span>2</span></td>
-                        <td><span>3</span></td>
-                        <td><span>4</span></td>
-                        <td>5</td>
-                        <td>6</td>
-                        <td><span>7</span></td>
-                      </tr>
-                      <tr>
-                        <td><span>8</span></td>
-                        <td><span>9</span></td>
-                        <td>10</td>
-                        <td>11</td>
-                        <td>12</td>
-                        <td>13</td>
-                        <td><span>14</span></td>
-                      </tr>
-                      <tr>
-                        <td><span>15</span></td>
-                        <td>16</td>
-                        <td>17</td>
-                        <td>18</td>
-                        <td>19</td>
-                        <td>20</td>
-                        <td>21</td>
-                      </tr>
-                      <tr>
-                        <td><span>22</span></td>
-                        <td>23</td>
-                        <td>24</td>
-                        <td>25</td>
-                        <td>26</td>
-                        <td>27</td>
-                        <td><span>28</span></td>
-                      </tr>
-                      <tr>
-                        <td><span>29</span></td>
-                        <td>30</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                      </tr>
-                    </tbody></table>
-                </div>
+                  <div><?php echo date('Y'); ?>年<?php echo date('m'); ?>月</div>
+
+                      <?php echo html_entity_decode(calOfMonth()); ?>
+
+                  </div>
+
                 <div class="frame">
-                  <div>2017年2月</div>
-                    <table>
-                    <tbody>
-                    <tr>
-                      <th>日</th>
-                      <th>月</th>
-                      <th>火</th>
-                      <th>水</th>
-                      <th>木</th>
-                      <th>金</th>
-                      <th>土</th>
-                    </tr>
-                    <tr>
-                      <td><span>1</span></td>
-                      <td><span>2</span></td>
-                      <td><span>3</span></td>
-                      <td><span>4</span></td>
-                      <td>5</td>
-                      <td>6</td>
-                      <td><span>7</span></td>
-                    </tr>
-                    <tr>
-                      <td><span>8</span></td>
-                      <td><span>9</span></td>
-                      <td>10</td>
-                      <td>11</td>
-                      <td>12</td>
-                      <td>13</td>
-                      <td><span>14</span></td>
-                    </tr>
-                    <tr>
-                      <td><span>15</span></td>
-                      <td>16</td>
-                      <td>17</td>
-                      <td>18</td>
-                      <td>19</td>
-                      <td>20</td>
-                      <td>21</td>
-                    </tr>
-                    <tr>
-                      <td><span>22</span></td>
-                      <td>23</td>
-                      <td>24</td>
-                      <td>25</td>
-                      <td>26</td>
-                      <td>27</td>
-                      <td><span>28</span></td>
-                    </tr>
-                    <tr>
-                      <td><span>29</span></td>
-                      <td>30</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                  </tbody></table>
+                  <div><?php echo date('Y'); ?>年<?php echo date('m')+1 ; ?>月</div>
+
+                  <?php echo html_entity_decode(calOfNextMonth()); ?>
+
                 </div>
                 <p>※赤字は定休日です</p>
               </div>

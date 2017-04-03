@@ -204,7 +204,7 @@ h1 {
 
 .form-control--small-xs {
   display: inline;
-  width: 78px;
+  width: 57px;
   height: 25px;
   padding: 3px;
   border-radius:3px;
@@ -572,3 +572,10 @@ i.table-cap {
   color: #C94C5B;
 }
 
+.dropdown-date {
+  width: 75px;
+}
+
+.min-width-td {
+  width: 130px;
+}

@@ -26,10 +26,10 @@
           </div>
           <table class="table table-bordered table-striped clearfix">
             <tr>
-              <td class="col-title" align="center">詳細・変更・削除</td>
-              <td class="col-title" align="center">表示</td>
+              <td class="col-title" align="center" style="width: 130px;">詳細・変更・削除</td>
+              <td class="col-title" align="center" style="width: 48px;">表示</td>
               <td class="col-title" align="center">タイトル</td>
-              <td class="col-title" align="center">情報登録日</td>
+              <td class="col-title" align="center" style="width: 76px;">情報登録日</td>
             </tr>
             @if(count($news) > 0)
               @foreach($news as $notice)

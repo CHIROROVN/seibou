@@ -12,14 +12,12 @@ class CalendarModel
     public function Rules()
     {
         return array(
-
         );
     }
 
     public function Messages()
     {
         return array(
-
         );
     }
 
@@ -32,16 +30,18 @@ class CalendarModel
     //get all calendar by year
     public function calendarByYear($year=null)
     {
-        return DB::table($this->table)->where('last_kind', '<>', DELETE)->where('calendar_year', $year)->get();
+        return DB::table($this->table)->where('last_kind', '<>', DELETE)->where('calendar_year', $year)->orderBy('calendar_date', 'desc')->get();
     }
 
     //get calendar by year-month
     public function calByYearMonth($year=null, $month=null)
     {
-        return DB::table($this->table)->select('calendar_date')
+        return DB::table($this->table)->select('calendar_id','calendar_date','calendar_free1')
                                     ->where('last_kind', '<>', DELETE)
                                     ->where('calendar_year', '=', $year)
-                                    ->whereMonth('calendar_date',$month)
+                                    ->where('calendar_free1', '=', $month)
+                                    ->orderBy('calendar_date', 'desc')
+                                    ->limit(16)
                                     ->get();
     }
 
@@ -50,10 +50,9 @@ class CalendarModel
     {
         return DB::table($this->table)->where('last_kind', '<>', DELETE)
                                     ->where('calendar_year', '=', $year)
-                                    ->whereMonth('calendar_date',$month)
+                                    ->whereMonth('calendar_date', $month)
                                     ->lists('calendar_date','calendar_id');
     }
-
 
     //Calendar insert
     public function insert($data)
@@ -67,10 +66,9 @@ class CalendarModel
         return DB::table($this->table)->where('calendar_id', $id)->first();
     }
 
-
     //Calendar update
-    public function editCalendar($year, $calendar_date, $data)
+    public function editCalendar($id, $data)
     {
-        return DB::table($this->table)->where('calendar_year', '=', $year)->where('calendar_date', '=', $calendar_date)->update($data);
+        return DB::table($this->table)->where('calendar_id', '=', $id)->update($data);
     }
 }

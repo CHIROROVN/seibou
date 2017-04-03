@@ -10,7 +10,7 @@
           <table class="table table-bordered table-regist">
             <tbody>
               <tr>
-                <td class="col-title">氏名 <span class="red">(＊)</span></td>
+                <td class="col-title min-width-td">氏名 <span class="red">(＊)</span></td>
                 <td>
                   <input name="u_name" type="text" class="form-control form-control--default">
                    @if ($errors->first('u_name')) 
@@ -19,7 +19,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="col-title">ログインID <span class="red">(＊)</span></td>
+                <td class="col-title min-width-td">ログインID <span class="red">(＊)</span></td>
                 <td>
                   <input name="u_login" type="text" class="form-control form-control--default"> ※英数字3文字以上、<span class="text-orange">重複不可</span>
                    @if ($errors->first('u_login')) 
@@ -28,7 +28,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="col-title">パスワード <span class="red">(＊)</span></td>
+                <td class="col-title min-width-td">パスワード <span class="red">(＊)</span></td>
                 <td>
                   <input name="u_passwd" type="text" class="form-control form-control--default"> ※英数字5文字以上
                    @if ($errors->first('u_passwd')) 
@@ -37,7 +37,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="col-title">操作権限</td>
+                <td class="col-title min-width-td">操作権限</td>
                 <td>
                   <div class="col-md-12 mar-bottom">
                     <input name="u_power1" value="1" type="checkbox" @if(old('u_power1') == '1') checked="" @endif> 「お知らせ」管理
@@ -51,7 +51,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="col-title">有効／無効</td>
+                <td class="col-title min-width-td">有効／無効</td>
                 <td>
                   <div class="col-md-12 mar-bottom">
                     <input name="u_free1" value="checkbox" type="checkbox" @if(old('u_free1') == '1') checked="" @endif> 一時的に無効とする（ログインできなくする）
