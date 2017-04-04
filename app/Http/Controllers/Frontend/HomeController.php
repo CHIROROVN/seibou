@@ -16,7 +16,7 @@ class HomeController extends FrontendController
     {
         parent::__construct();
     }
-	
+    
     public function index()
     {
 

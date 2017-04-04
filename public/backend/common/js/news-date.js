@@ -23,7 +23,7 @@ $(document).ready(function(){
 $('#year').click(function(event) {
     var date = new Date();
     var year = date.getFullYear();
-    var month    = date.getMonth()+1;
+    var month    = format2Digit(date.getMonth()+1);
     var day = format2Digit(date.getDate());
     var totaldays = new Date(year,month,1,-1).getDate();
     var opthtml = "<option value=''>--日</option>";
@@ -37,8 +37,8 @@ $('#year').click(function(event) {
       $('#month option[value=""]').prop('selected',true);
       $('#day option[value=""]').prop('selected',true);
     }else{
-      $('#month option[value="' + format2Digit(month) + '"]').prop('selected',true);
-      $('#day option[value="' + format2Digit(day) + '"]').prop('selected',true);
+      $('#month option[value="' + month + '"]').prop('selected',true);
+      $('#day option[value="' + day + '"]').prop('selected',true);
     }
 
    $('#month').click(function(event) {
@@ -56,7 +56,7 @@ $('#year').click(function(event) {
     if( $(this).val() == '' ){
       $('#day option[value=""]').prop('selected',true);
     }else{
-      $('#day option[value="' + format2Digit(day) + '"]').prop('selected',true);
+      $('#day option[value="' + day + '"]').prop('selected',true);
     }
 
    });

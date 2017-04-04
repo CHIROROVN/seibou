@@ -23,7 +23,7 @@
           <tr>
             <td class="col-title">パスワード</td>
             <td>
-              {{$user->u_passwd}}
+              <!-- {{$user->u_passwd}} -->
             </td>
           </tr>
           <tr>

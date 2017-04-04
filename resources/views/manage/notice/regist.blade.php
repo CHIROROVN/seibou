@@ -145,9 +145,10 @@
         {!! Form::close() !!}
       </div>
     </section>
- <script src="{{ asset('') }}public/backend/common/js/news-date.js"></script>
-    <script>
 
+    <script src="{{ asset('') }}public/backend/common/js/news-date.js"></script>
+
+    <script>
       var tdate = new Date();
       var tyear = tdate.getFullYear();
       var tmonth    = cvt2Digit(tdate.getMonth()+1);
