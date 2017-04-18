@@ -24,7 +24,7 @@
     function dayFromDate($date){
         $dt         = DateTime::createFromFormat("Y-m-d", $date);
         if(!empty($dt)){
-            return $dt->format("d");
+            return $dt->format("d") + 0;
          }else{
             return '';
          }

@@ -28,7 +28,7 @@
               </tr>
               @for($m=1; $m<=12; $m++)
               <tr>
-                <td class="col-title">{{$m}}月</td>
+                <td class="col-title cal-col">{{$m}}月</td>
                  <td>
                   <input name="holiday[cell_1_{{$m}}]" maxlength="2" type="text" class="form-control form-control--small-xs">
                   <input name="holiday[cell_2_{{$m}}]" maxlength="2" type="text" class="form-control form-control--small-xs">

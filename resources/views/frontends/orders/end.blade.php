@@ -102,7 +102,7 @@
     </tr>
     <tr>
       <td class="col-title">部署名</td>
-      <td>{{ $cartConfirm['order']['order_division'] }}
+      <td>{{ trim($cartConfirm['order']['order_division']) }}
       </td>
     </tr>
     <tr>
@@ -151,6 +151,30 @@
     </tr>
   </tbody>
 </table>
+
+<div class="row mar-bottom30">
+  <div class="col-md-12 text-center">
+    <?php
+    $item_code_1 = '';$item_code_2 = '';$item_code_3 = '';
+    if ( Session::has('dataSearch') ) {
+        $item_code_1 = empty(Session::get('dataSearch')['item_code_1']) ? '' : Session::get('dataSearch')['item_code_1'];
+        $item_code_2 = empty(Session::get('dataSearch')['item_code_2']) ? '' : Session::get('dataSearch')['item_code_2'];
+        $item_code_3 = empty(Session::get('dataSearch')['item_code_3']) ? '' : Session::get('dataSearch')['item_code_3'];
+    }
+    ?>
+    <input onclick="location.href='{{ route('front.products.list', [
+        'item_code_1' => $item_code_1,
+        'item_code_2' => $item_code_2,
+        'item_code_3' => $item_code_3
+        ]) }}'" value="検索結果一覧に戻る" type="button" class="btn btn-sm btn-primary" style="margin-right: 10px;"><input onclick="location.href='{{ route('front.products.search') }}'" value="条件を変えて再検索" type="button" class="btn btn-sm btn-primary">
+  </div>
+</div>
+            
+<div class="row mar-bottom30">
+  <div class="col-md-12 text-center">
+    <input onclick="location.href='{{ route('front.home') }}'" value="ホーム" type="button" class="btn btn-sm btn-primary">
+  </div>
+</div>
 </div>
 
 @stop

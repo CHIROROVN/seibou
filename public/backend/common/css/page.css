@@ -455,11 +455,11 @@ h1 {
 }
 
 .dropdown-menu {
-  right: -30px;
+  left: auto;
+  right: 20px;
   min-width: 300px;
   top: 43px;
   background:rgba(22,99,172,0.7);
-  left:unset;
   border-radius: 0px;
 }
 
@@ -577,5 +577,10 @@ i.table-cap {
 }
 
 .min-width-td {
-  width: 130px;
+  width: 140px;
+}
+
+.cal-col {
+  width: 52px;
+  text-align: center;
 }

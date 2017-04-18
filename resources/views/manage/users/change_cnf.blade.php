@@ -9,39 +9,39 @@
       <table class="table table-bordered table-regist">
             <tbody>
               <tr>
-                <td class="col-title">氏名</td>
+                <td class="col-title min-width-td">氏名</td>
                 <td>
                   {{$user->u_name}}
                 </td>
               </tr>
               <tr>
-                <td class="col-title">ログインID</td>
+                <td class="col-title min-width-td">ログインID</td>
                 <td>
                   {{$user->u_login}}
                 </td>
               </tr>
               <tr>
-                <td class="col-title">パスワード</td>
+                <td class="col-title min-width-td">パスワード</td>
                 <td>
                   {{@$user->u_passwd_original}}
                 </td>
               </tr>
               <tr>
-                <td class="col-title">操作権限</td>
+                <td class="col-title min-width-td">操作権限</td>
                 <td>
                 @if($user->u_power1 != null)
-                  ・「お知らせ」管理
+                  ・「お知らせ」管理 <br>
                   @endif
-                  @if($user->u_power2 != null)<br>
-                  ・「営業日カレンダー」管理
+                  @if($user->u_power2 != null)
+                  ・「営業日カレンダー」管理 <br>
                   @endif
-                  @if($user->u_power3 != null)<br>
+                  @if($user->u_power3 != null)
                   ・ユーザー管理
                   @endif
                 </td>
               </tr>
               <tr>
-                <td class="col-title">有効／無効</td>
+                <td class="col-title min-width-td">有効／無効</td>
                 <td>
                   @if($user->u_free1 != null)
                   有効

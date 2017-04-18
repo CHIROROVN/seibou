@@ -14,14 +14,6 @@
         <td class="col-title" align="center">商品名</td>
         <td>{{ $product->商品名 }}</td>
       </tr>
-      <tr>
-        <td class="col-title" align="center">入数</td>
-        <td>{{ $product->入数 }}</td>
-      </tr>
-      <tr>
-        <td class="col-title" align="center">備考</td>
-        <td>{{ $product->商品備考 }}</td>
-      </tr>
     </tbody></table>
     <h1>在庫表示</h1>
     <table class="table table-bordered table-striped clearfix custom-table-static">

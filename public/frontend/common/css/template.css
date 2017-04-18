@@ -8,10 +8,12 @@
 
 --------------------------------------------------------------------------------------------------*/
 .header-font-end .logo {
-  margin-top:20px; /* original : 40px*/
-  margin-bottom:30px;
+  margin-top:10px; /* original : 40px*/
+  margin-bottom:10px;
 }
-
+.header-font-end .logo img {
+	width: 250px;
+}
 .header-font-end .title-top {
   background: #ECEBEB;
   height: 40px;
@@ -110,9 +112,8 @@
   height:23px;
   line-height:23px;
   text-align:center;
-  display: inline-block;
+  display: block;
 }
-
 
 #page-fontend .menu-left th:first-child {
   color:#dc8b8b;

@@ -108,4 +108,10 @@ class DeliveryModel
     {
         return DB::table($this->table)->where('delivery_id', $id)->update($data);
     }
+    
+    //delivery address default update to NULL
+    public function getAddrsDefault()
+    {
+        return DB::table($this->table)->select('delivery_id')->where('last_kind', '<>', DELETE)->where('delivery_free2', '1')->get();
+    }
 }

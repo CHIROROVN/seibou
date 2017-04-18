@@ -35,9 +35,15 @@
                 <button class="btn btn-sm btn-info  btn-mar-right dropdown-toggle" type="button" data-toggle="dropdown">メニューへ
                 <span class="caret"></span></button>
                 <ul class="dropdown-menu">
+                  @if(Auth::user()->u_power1 == 1)
                   <li><a href="{{route('manage.notice.index')}}">「お知らせ」管理</a></li>
+                  @endif
+                  @if(Auth::user()->u_power2 == 1)
                   <li><a href="{{route('manage.calendar.index')}}">「営業日カレンダー」管理</a></li>
+                  @endif
+                  @if(Auth::user()->u_power3 == 1)
                   <li><a href="{{route('manage.users.index')}}">ユーザー管理</a></li>
+                  @endif
                 </ul>
               </div>
 

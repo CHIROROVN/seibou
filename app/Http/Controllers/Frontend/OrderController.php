@@ -27,7 +27,6 @@ class OrderController extends FrontendController
     
     public function index()
     {
-        //echo '<pre>';print_r(Cookie::get('userLogin'));die;
         if ( !Session::has('cart') ) {
             return redirect()->route('front.products.search');
         }
@@ -50,24 +49,23 @@ class OrderController extends FrontendController
         }
         
         $inputs = Input::all();
-        //echo '<pre>';print_r($inputs);die;
         $this->data['breadcrumb']       = 'Web受発注システム　＞　在庫照会・発注　＞　納入先の指定　＞　確認';
         
         $rules = array(
             'order_name'          => 'required',
-            'order_zip3'       => 'required',
-            'order_zip4'       => 'required',
-            'order_address1'   => 'required',
-            'order_tel'        => 'required',
+            'order_zip3'          => 'required',
+            'order_zip4'          => 'required',
+            'order_address1'      => 'required',
+            'order_tel'           => 'required',
             'order_shipping'      => 'required',
             'order_invoice'       => 'required',
         );
         $messages = array(
             'order_name.required'           => trans('validation.error_order_order_name_required'),
-            'order_zip3.required'        => trans('validation.error_order_order_zip3_required'),
-            'order_zip4.required'        => trans('validation.error_order_order_zip4_required'),
-            'order_address1.required'    => trans('validation.error_order_order_address1_required'),
-            'order_tel.required'         => trans('validation.error_order_order_tel_required'),
+            'order_zip3.required'           => trans('validation.error_order_order_zip3_required'),
+            'order_zip4.required'           => trans('validation.error_order_order_zip4_required'),
+            'order_address1.required'       => trans('validation.error_order_order_address1_required'),
+            'order_tel.required'            => trans('validation.error_order_order_tel_required'),
             'order_shipping.required'       => trans('validation.error_order_shipping_required'),
             'order_invoice.required'        => trans('validation.error_order_invoice_required'),
         );
@@ -148,13 +146,13 @@ class OrderController extends FrontendController
         $this->data['webmkb']           = $clsConstant->getWEBMKB();
         $this->data['webdkb']           = $clsConstant->getWEBDKB();
         
-        //echo '<pre>';print_r(Session::get('cartConfirm'));die;
         return view('frontends.orders.confirm', $this->data);
     }
     
     public function getEndIndex()
     {
         $clsWebOrder = new WebOrderModel();
+        $clsProduct  = new ProductModel();
         
         //$clsWebOrder->deleteTest(2017030004);
         //$clsWebOrder->deleteTest(2017030003);
@@ -174,17 +172,19 @@ class OrderController extends FrontendController
         $webdkb                         = $clsConstant->getWEBDKB();
         //insert to table "web order table"
         $i = 1;
+        $tmpIdInsert = date('ym').sprintf("%04d", $i);
+        $tmpIdInsert = (int)$clsWebOrder->checkIdForInsert($tmpIdInsert);
         foreach ( Session::get('cartConfirm')['cart'] as $item ) {
-            $tmpIdInsert = date('Ym').sprintf("%04d", $i);
+            $product = $clsProduct->getById($item['product_id']);
             $tmp3 = sprintf("%03d", $i);
             $dataInsert = array(
-                '伝票No'                 => (int)$clsWebOrder->checkIdForInsert($tmpIdInsert),
+                '伝票No'                 => $tmpIdInsert,
                 '伝票行No'               => (int)$tmp3,//(int)sprintf("%03d", $i),
                 '得意先CD'               => Cookie::get('userLogin')['user_id'],
                 '得意先担当者名'         => empty(Session::get('cartConfirm')['order_inputs']['order_name']) ? '' : Session::get('cartConfirm')['order_inputs']['order_name'],
                 '受注日'                 => date('Ymd'),
-                '商品CD'                 => Session::get('productDetail')->商品CD,
-                '商品区分'               => (int)Session::get('productDetail')->商品区分,
+                '商品CD'                 => $item['product_id'],
+                '商品区分'               => (int)$product->商品区分,
                 '色CD'                   => $item['color_id'],
                 'ｻｲｽﾞCD'                 => $item['size_id'],
                 '数量'                   => $item['quantity'],
@@ -212,13 +212,12 @@ class OrderController extends FrontendController
             if ( $item['quantityStockMeisai'] < $item['quantity'] ) {
                 $dataInsert['納期連絡区分'] = 2;
             }
-            //echo '<pre>';print_r($dataInsert);die;
             $insert = $clsWebOrder->insert($dataInsert);
             $i++;
             
             $dataInsert['color_name'] = $item['color_name'];
             $dataInsert['size_name'] = $item['size_name'];
-            $dataInsert['prduct_name'] = Session::get('productDetail')->商品名;
+            $dataInsert['prduct_name'] = $product->商品名;
             $tmpEmail['email'][] = $dataInsert;
             //die;
         }
@@ -230,21 +229,16 @@ class OrderController extends FrontendController
         
         //$clsWebOrder->deleteTest(2);
         $webOrder = $clsWebOrder->getAll();
-        //echo '<pre>';print_r($webOrder);die;
         //send 2 email
         //if send is ok -> delete session
         $send = Mail::send(['html' => 'frontends.orders.guest'], array('tmpEmail' => $tmpEmail), function($message) use ($tmpEmail){
             $message->from(FROM_EMAIL, FROM_NAME);
-            $message->to('dophu17@gmail.com')->subject(TITLE_ORDER_GUEST);
+            $message->to($tmpEmail['login']['user_email'])->subject(TITLE_ORDER_GUEST);
         });
-        //if ( !$send ) {
-        //    echo 'Send email is error!!!';die;
-        //}
         //delete session cart
         Session::forget('productDetail');
         Session::forget('cartConfirm');
         Session::forget('cart');
-        //echo '<pre>';print_r($tmpEmail);die;
         return view('frontends.orders.end', $this->data);
     }
     

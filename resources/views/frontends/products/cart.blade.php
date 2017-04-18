@@ -25,6 +25,7 @@
         <td class="col-title" align="center">備考</td>
       </tr>
       
+      <?php $disable = '' ?>
       @if ( Session::get('cart') && count(Session::get('cart')) > 0 )
         @foreach ( Session::get('cart') as $cart )
         <tr>
@@ -43,12 +44,14 @@
           </td>
         </tr>
         @endforeach
+      @else
+      <?php $disable = 'disabled' ?>
       @endif
     </table>
     <div class="row mar-bottom30">
       <div class="col-md-12 text-center">
         <input onclick="history.back()" value="前の画面に戻る" type="button" class="btn btn-sm btn-primary">
-        <input onclick="location.href='{{ route('front.orders.index') }}'" value="発注画面へ" type="button" class="btn btn-sm btn-primary mar-left40">
+        <input onclick="location.href='{{ route('front.orders.index') }}'" value="発注画面へ" type="button" class="btn btn-sm btn-primary mar-left40" {{ $disable }}>
       </div>
     </div>
     <div class="row mar-bottom30">

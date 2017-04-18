@@ -500,6 +500,35 @@ h1 {
 }
 
 
+/*----phu add 2017-03-27------*/
+.custom-first-col {
+  width: 190px;
+  min-width: 190px;
+}
+
+.col-title-custom {
+  width: 50px;
+}
+
+.custom-table-static {
+  display: flex;
+}
+
+.dropdown-year {
+	text-align:center;
+	width: 75px;
+}
+
+.dropdown-date {
+	text-align:center;
+	width: 59px;
+}
+
+td.col-title {
+	width: 211px;
+}
+
+
 
 
 

@@ -36,11 +36,12 @@ class CalendarModel
     //get calendar by year-month
     public function calByYearMonth($year=null, $month=null)
     {
-        return DB::table($this->table)->select('calendar_id','calendar_date','calendar_free1')
+        return DB::table($this->table)->select('calendar_id','calendar_date','calendar_free1', DB::raw('calendar_date IS NULL AS sortOrderNull'))
                                     ->where('last_kind', '<>', DELETE)
                                     ->where('calendar_year', '=', $year)
                                     ->where('calendar_free1', '=', $month)
-                                    ->orderBy('calendar_date', 'desc')
+                                    ->orderBy('sortOrderNull', 'asc')
+                                    ->orderBy('calendar_date', 'asc')
                                     ->limit(16)
                                     ->get();
     }

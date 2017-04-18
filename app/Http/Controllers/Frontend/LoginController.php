@@ -20,6 +20,10 @@ class LoginController extends FrontendController
     
     public function getLogin()
     {
+        if ( Cookie::get('userLogin') ) {
+            return redirect()->route('front.home');
+        }
+        
         //$clsCustomer = new CustomerModel();
         $data['breadcrumb'] = 'Web受発注システム　＞　ログイン';
         return view('frontends.login.login', $data);

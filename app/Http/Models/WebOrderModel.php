@@ -22,6 +22,26 @@ class WebOrderModel
         return $db;
     }
     
+    public function getByHistoryIdId1($historyId, $historyId1)
+    {
+        $db = DB::connection($this->connection)->table($this->table)
+                                              ->where($this->primaryId, $historyId)
+                                              ->where('伝票行No', $historyId1)
+                                              ->first();
+        return $db;
+    }
+    
+    public function getByHistoryId($historyId)
+    {
+        $db = DB::connection($this->connection)->table($this->table)
+                                              //->leftJoin('M_SIZE', 'D_WEB仮受注伝票.ｻｲｽﾞCD', '=', 'M_SIZE.ｻｲｽﾞCD')
+                                              //->leftJoin('M_色', 'D_WEB仮受注伝票.色CD', '=', 'M_色.色CD')
+                                              //->select('D_WEB仮受注伝票.*')
+                                              ->where($this->primaryId, $historyId)
+                                              ->get();
+        return $db;
+    }
+    
     public function checkIdForInsert($id)
     {
         $db = DB::connection($this->connection)->table($this->table)->where($this->primaryId, $id)->first();
@@ -64,15 +84,28 @@ class WebOrderModel
         }
         //id
         if ( isset($where['web_order_id']) && $where['web_order_id'] != '' ) {
-            $db = $db->where('伝票No', 'LIKE', '%' . $where['web_order_id'] . '%');
+            $db = $db->where($this->primaryId, 'LIKE', '%' . $where['web_order_id'] . '%');
         }
         //status
         if ( isset($where['status']) && $where['status'] != '' ) {
             $db = $db->where('出荷区分', $where['status']);
         }
         
-        $results = $db->orderBy('商品CD', 'asc')->get();
+        $results = $db->orderBy('出荷区分', 'asc')->orderBy($this->primaryId, 'asc')->get()->unique($this->primaryId);
         return $results;
+    }
+    
+    public function updateHistory($id, $data)
+    {
+        $db = DB::connection($this->connection)->table($this->table)->where($this->primaryId, $id)->update($data);
+        return $db;
+    }
+    
+    //maybe some record in group order
+    public function deleteHistory($historyId)
+    {
+        $db = DB::connection($this->connection)->table($this->table)->where($this->primaryId, $historyId)->update(['出荷区分' => 31]);
+        return $db;
     }
     
     public function insert($data)

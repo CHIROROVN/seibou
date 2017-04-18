@@ -55,8 +55,10 @@
         </tr>
         <tr>
           <td class="col-title">納品書同送</td>
-          <td>
-            @if($delivery->delivery_free1 == '1') 否 @else 可 @endif
+          <td>                         
+            @foreach ( $webdkb as $item )
+            	@if($delivery->delivery_free1 == $item->ｺｰﾄﾞ) {{ $item->名称 }} @endif
+            @endforeach
           </td>
         </tr>
       </tbody>

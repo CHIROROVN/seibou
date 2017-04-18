@@ -8,10 +8,16 @@
     <div style="clear:both;"></div>
     <div class="col-md-9 content-right" style="width: 750px;float: left;">
       <h1>発注内容<span class="small_text">（こちらの内容は納品書に印字されます）</span></h1>
-      <p> 現在の発注リストの中身は、以下の通りです。<br />
-        <br />
-        <span class="text-orange">★印の商品は、在庫がない場合にのみ表示されます。</span><br>
-        <span class="text-orange">＊摘要は注文番号やご担当者名が必要な場合に入力ください。必須項目ではありません。</span><br>
+      
+      @if (count($errors) > 0)
+        @foreach ($errors->all() as $error)
+          <div class="caution"><img src="{{ asset('') }}public/frontend/common/image/caution.gif" width="18px">　{{ $error }}</div>
+        @endforeach
+      @endif
+      
+      <p>
+        現在の発注リストの中身は、以下の通りです。<br><br>
+        <span style=" font-size: 1.2em; color:#f00;">★印の商品は、在庫がない場合にのみ表示されます。<br>＊注文番号はお客様にて必要な際に入力してください。必須ではありません。</span><br>
       </p>
       <table class="table table-bordered table-striped clearfix">
         <tr>
@@ -43,6 +49,7 @@
         @endif
       
       </table>
+      
       <h1>得意先担当者情報<span class="small_text">（こちらの内容は納品書に印字されます）</span></h1>
       <table class="table table-bordered table-regist">
         <tbody>
@@ -59,6 +66,7 @@
           <tr> </tr>
         </tbody>
       </table>
+      
       <h1>メッセージ及び発送方法・発送日時指定<span class="small_text">（こちらの内容は納品書に印字されません）</span></h1>
       <table class="table table-bordered table-regist">
         <tbody>
@@ -68,7 +76,7 @@
             <td><textarea name="order_content_2" type="text" class="form-control form-control--default" rows="3" style="width: 370px;">{{ old('order_content_2') }}</textarea></td>
           </tr>
           <tr>
-            <td class="col-title">出荷方法<span class="red">(＊)</span></td>
+            <td class="col-title">出荷方法<span class="red">（必須）</span></td>
             <td>
               @foreach ( $webmkb as $item )
               <input name="order_shipping" type="radio" value="{{ $item->ｺｰﾄﾞ }}" @if(old('order_shipping') == $item->ｺｰﾄﾞ) checked @endif>{{ $item->名称 }}<br>
@@ -89,6 +97,7 @@
           <tr> </tr>
         </tbody>
       </table>
+      
       <h1>納入先<span class="small_text">（こちらの内容は納品書に印字されません）</span></h1>
       <div style="clear:both;"></div>
       <p style="padding-bottom: 8px;">納入先を選択、または入力してください。</p>
@@ -101,7 +110,7 @@
             
                 @if ( count($deliveries) > 0 )
                   @foreach ( $deliveries as $delivery )
-                  <option value="{{ $delivery->delivery_id }}">{{ $delivery->delivery_name }}</option>
+                  <option value="{{ $delivery->delivery_id }}" @if(old('delivery_id') == $delivery->delivery_id) selected @endif>{{ $delivery->delivery_name }}</option>
                   @endforeach
                 @endif
                 
@@ -112,13 +121,13 @@
           </tr>
         </tbody>
       </table>
-      <span class="red">(＊)は必須項目です。</span>
+      
       <table class="table table-bordered table-regist" style="margin-top: 8px;">
         <tbody>
           <tr>
-            <td class="col-title">納入先名<span class="red">(＊)</span></td>
+            <td class="col-title">納入先名<span class="red">（必須）</span></td>
             <td>
-              <input name="order_name" value="" id="order_name" type="text" class="form-control form-control--default">
+              <input name="order_name" value="{{ old('order_name') }}" id="order_name" type="text" class="form-control form-control--default">
               @if ($errors->first('order_name'))
               <div class="caution"><img src="{{ asset('') }}public/frontend/common/image/caution.gif" width="18px">　{{ $errors->first('order_name') }}</div>
               @endif
@@ -127,17 +136,17 @@
           <tr>
             <td class="col-title">部署名</td>
             <td>
-              <input name="order_division" value="" id="order_division" type="text" class="form-control form-control--default">
+              <input name="order_division" value="{{ old('order_division') }}" id="order_division" type="text" class="form-control form-control--default">
             </td>
           </tr>
           <tr>
             <td class="col-title">ご担当者名</td>
-            <td><input name="order_member" value="" id="order_member" type="text" class="form-control form-control--default"></td>
+            <td><input name="order_member" value="{{ old('order_member') }}" id="order_member" type="text" class="form-control form-control--default"></td>
           </tr>
           <tr>
-            <td class="col-title">郵便番号<span class="red">(＊)</span></td>
+            <td class="col-title">郵便番号<span class="red">（必須）</span></td>
             <td>
-              <input name="order_zip3" value="" id="order_zip3" type="text" class="form-control form-control--small-xs"> - <input name="order_zip4" value="" id="order_zip4" type="text" class="form-control form-control--small-xs" >
+              <input name="order_zip3" value="{{ old('order_zip3') }}" id="order_zip3" type="text" class="form-control form-control--small-xs"> - <input name="order_zip4" value="{{ old('order_zip4') }}" id="order_zip4" type="text" class="form-control form-control--small-xs" >
               @if ($errors->first('order_zip3'))
               <div class="caution"><img src="{{ asset('') }}public/frontend/common/image/caution.gif" width="18px">　{{ $errors->first('order_zip3') }}</div>
               @endif
@@ -147,9 +156,9 @@
             </td>
           </tr>
           <tr>
-            <td class="col-title">住所<span class="red">(＊)</span></td>
+            <td class="col-title">住所<span class="red">（必須）</span></td>
             <td>
-              <input name="order_address1" value="" id="order_address1" type="text" class="form-control form-control--default">
+              <input name="order_address1" value="{{ old('order_address1') }}" id="order_address1" type="text" class="form-control form-control--default">
               @if ($errors->first('order_address1'))
               <div class="caution"><img src="{{ asset('') }}public/frontend/common/image/caution.gif" width="18px">　{{ $errors->first('order_address1') }}</div>
               @endif
@@ -157,12 +166,12 @@
           </tr>
           <tr>
             <td class="col-title">住所（ビル名等）</td>
-            <td><input name="order_address2" value="" id="order_address2" type="text" class="form-control form-control--default"></td>
+            <td><input name="order_address2" value="{{ old('order_address2') }}" id="order_address2" type="text" class="form-control form-control--default"></td>
           </tr>
           <tr>
-            <td class="col-title">電話番号<span class="red">(＊)</span></td>
+            <td class="col-title">電話番号<span class="red">（必須）</span></td>
             <td>
-              <input name="order_tel" value="" id="order_tel" type="text" class="form-control form-control--small" >
+              <input name="order_tel" value="{{ old('order_tel') }}" id="order_tel" type="text" class="form-control form-control--small" >
               @if ($errors->first('order_tel'))
               <div class="caution"><img src="{{ asset('') }}public/frontend/common/image/caution.gif" width="18px">　{{ $errors->first('order_tel') }}</div>
               @endif
@@ -171,14 +180,18 @@
           <tr>
             <td class="col-title">FAX番号</td>
             <td>
-              <input name="order_fax" value="" id="order_fax" type="text" class="form-control form-control--small">
+              <input name="order_fax" value="{{ old('order_fax') }}" id="order_fax" type="text" class="form-control form-control--small">
             </td>
           </tr>
           <tr>
-            <td class="col-title">納品書同送<span class="red">(＊)</span></td>
+            <td class="col-title">納品書同送<span class="red">（必須）</span></td>
             <td>
               @foreach ( $webdkb as $item )
-              <input name="order_invoice" id="order_invoice_{{ $item->ｺｰﾄﾞ }}" class="order_invoice" type="radio" value="{{ $item->ｺｰﾄﾞ }}">
+              <?php $selected = '' ?>
+              @if ( old('order_invoice') == $item->ｺｰﾄﾞ )
+              <?php $selected = 'checked' ?>
+              @endif
+              <input name="order_invoice" id="order_invoice_{{ $item->ｺｰﾄﾞ }}" class="order_invoice" type="radio" value="{{ $item->ｺｰﾄﾞ }}" {{ $selected }}>
               {{ $item->名称 }}　
               @endforeach
               
@@ -218,9 +231,10 @@
               
               
               if ( result.from === 'sqlserver' ) {
+                var zip = result.customer.郵便番号.split('-');
                 $('#order_name').val(result.customer.得意先名);
-                $('#order_zip3').val(result.customer.郵便番号);
-                $('#order_zip4').val(result.customer.住所2);
+                $('#order_zip3').val(zip[0]);
+                $('#order_zip4').val(zip[1]);
                 $('#order_address1').val(result.customer.住所1);
                 $('#order_address2').val(result.customer.住所2);
                 $('#order_tel').val(result.customer.電話番号);
@@ -228,8 +242,8 @@
                 $('.order_invoice').prop('checked', false);
                 
                 $('#order_name').attr('value', result.customer.得意先名);
-                $('#order_zip3').attr('value', result.customer.郵便番号);
-                $('#order_zip4').attr('value', result.customer.住所2);
+                $('#order_zip3').attr('value', zip[0]);
+                $('#order_zip4').attr('value', zip[1]);
                 $('#order_address1').attr('value', result.customer.住所1);
                 $('#order_address2').attr('value', result.customer.住所2);
                 $('#order_tel').attr('value', result.customer.電話番号);

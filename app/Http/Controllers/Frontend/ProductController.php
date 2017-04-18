@@ -11,6 +11,7 @@ use App\Http\Models\CustomerModel;
 use Input;
 use Session;
 use Form;
+use Validator;
 
 class ProductController extends FrontendController
 {
@@ -36,6 +37,18 @@ class ProductController extends FrontendController
         $clsSize                        = new SizeModel();
         $this->data['breadcrumb']       = 'Web受発注システム　＞　在庫照会・発注　＞　検索結果一覧';
         $where                          = Input::all();
+        
+        $rules = array(
+            'item_code_1' => 'required',
+        );
+        $messages = array(
+            'item_code_1.required' => trans('validation.error_item_code_1_required'),
+        );
+        $validator = Validator::make($where, $rules, $messages);
+        if ( $validator->fails() ) {
+            return redirect()->route('front.products.search')->withErrors($validator)->withInput();
+        }
+        
         Session::put('dataSearch', $where);
         $products                       = $clsProduct->getAll($where);
         
@@ -138,9 +151,20 @@ class ProductController extends FrontendController
         $inputs                         = Input::all();
         $product                        = $clsProduct->getById($id);
         $tmpCart = array();
+        
         if ( !empty($inputs) ) {
             unset($inputs['_token']);
-            //echo '<pre>';
+            //check item exists in cart
+            //if exists, no add to cart
+            foreach ( $inputs as $k => $v ) {
+                if ( Session::has('cart') ) {
+                    foreach ( Session::get('cart') as $item ) {
+                        if ( $item['cart_id'] == $k ) {
+                            unset($inputs[$k]);
+                        }
+                    }
+                }
+            }
             //print_r($inputs);die;
             foreach ( $inputs as $k => $v ) {
                 if ( $v != '' ) {
@@ -165,15 +189,17 @@ class ProductController extends FrontendController
                     $tmpCart[] = $tmp;
                 }
             }
-            Session::put('cart', $tmpCart);
+            $tmpTotalArr = array();
+            if ( Session::has('cart') && !empty($inputs) ) {
+              $array = Session::get('cart');
+              $array1 = $tmpCart;
+              $tmpTotalArr = array_merge($array, $array1);
+            } else {
+              $tmpTotalArr = $tmpCart;;
+            }
+            Session::put('cart', $tmpTotalArr);
         }
         
-        
-        //echo '<pre>';
-        //$totalCartNow = count(Session::get('cart'));
-        //$total = $totalCartNow + 1;
-        //echo 'total'.$totalCartNow;
-        //Session::push('cart.' . $total, 'developers 1');
         //print_r(Session::get('productDetail'));
         //print_r(Session::get('cart'));die;
         return view('frontends.products.cart', $this->data);

@@ -28,7 +28,7 @@
                 <td class="col-title" colspan="16" align="center">日曜日を除く休日</td>
               </tr>
               <tr>
-                <td class="col-title">1月</td>
+                <td class="col-title cal-col">1月</td>
                  <td>
                  <?php $m1OfDays = holidayOfMonth($year, '01');?>
                  @foreach($m1OfDays as $m1)
@@ -37,7 +37,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="col-title">2月</td>
+                <td class="col-title cal-col">2月</td>
                  <td>
                   <?php $m2OfDays = holidayOfMonth($year, '02');?>
                  @foreach($m2OfDays as $m2)
@@ -46,7 +46,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="col-title">3月</td>
+                <td class="col-title cal-col">3月</td>
                  <td>
                   <?php $m3OfDays = holidayOfMonth($year, '03');?>
                  @foreach($m3OfDays as $m3)
@@ -55,7 +55,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="col-title">4月</td>
+                <td class="col-title cal-col">4月</td>
                  <td>
                   <?php $m4OfDays = holidayOfMonth($year, '04'); ?>
                  @foreach($m4OfDays as $m4)
@@ -64,7 +64,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="col-title">5月</td>
+                <td class="col-title cal-col">5月</td>
                  <td>
                   <?php $m5OfDays = holidayOfMonth($year, '05');?>
                  @foreach($m5OfDays as $m5)
@@ -73,7 +73,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="col-title">6月</td>
+                <td class="col-title cal-col">6月</td>
                  <td>
                   <?php $m6OfDays = holidayOfMonth($year, '06');?>
                  @foreach($m6OfDays as $m6)
@@ -82,7 +82,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="col-title">7月</td>
+                <td class="col-title cal-col">7月</td>
                  <td>
                   <?php $m7OfDays = holidayOfMonth($year, '07');?>
                  @foreach($m7OfDays as $m7)
@@ -91,7 +91,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="col-title">8月</td>
+                <td class="col-title cal-col">8月</td>
                  <td>
                   <?php $m8OfDays = holidayOfMonth($year, '08');?>
                  @foreach($m8OfDays as $m8)
@@ -100,7 +100,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="col-title">9月</td>
+                <td class="col-title cal-col">9月</td>
                  <td>
                   <?php $m9OfDays = holidayOfMonth($year, '09');?>
                  @foreach($m9OfDays as $m9)
@@ -109,7 +109,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="col-title">10月</td>
+                <td class="col-title cal-col">10月</td>
                  <td>
                   <?php $m10OfDays = holidayOfMonth($year, '10');?>
                  @foreach($m10OfDays as $m10)
@@ -118,7 +118,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="col-title">11月</td>
+                <td class="col-title cal-col">11月</td>
                  <td>
                   <?php $m11OfDays = holidayOfMonth($year, '11');?>
                  @foreach($m11OfDays as $m11)
@@ -127,7 +127,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="col-title">12月</td>
+                <td class="col-title cal-col">12月</td>
                  <td>
                   <?php $m12OfDays = holidayOfMonth($year, '12');?>
                  @foreach($m12OfDays as $m12)

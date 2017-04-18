@@ -44,14 +44,12 @@ class NoticeController extends BackendController
     public function postRegist(Request $request) {
         $clsNews                = new NewsModel();
         $Rules                  = $clsNews->Rules();
-        if( !empty($request->get('year')) && !empty($request->get('month')) && !empty($request->get('day')) ){
-            unset($Rules['year']);
-            unset($Rules['month']);
-            unset($Rules['day']);
-        }else{
-            unset($Rules['month']);
-            unset($Rules['day']);
-        }
+
+        // if( !empty($request->get('year') ) && !empty($request->get('month') ) && !empty($request->get('day') ) ){
+        //     unset($Rules['year']);
+        //     unset($Rules['month']);
+        //     unset($Rules['day']);
+        // }
 
         $validator = Validator::make(Input::all(), $Rules, $clsNews->Messages());
         if ($validator->fails()) {

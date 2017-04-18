@@ -4,7 +4,7 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Models\CustomerModel;
 use App\Http\Models\NewsModel;
 use App\Http\Models\CalendarModel;
-
+use Carbon\Carbon;
 use Session;
 use Illuminate\Http\Request;
 use Cookie;
@@ -16,14 +16,13 @@ class HomeController extends FrontendController
     {
         parent::__construct();
     }
-    
+	
     public function index()
     {
-
         $clsCustomer                    = new CustomerModel();
         $clsNews                        = new NewsModel();
         $this->data['breadcrumb']       = 'Web受発注システム　＞　ホーム';
-        $this->data['news']             = $clsNews->getAll();
+        $this->data['news']             = $clsNews->getAllNews();
         return view('frontends.home.index', $this->data);
     }
 

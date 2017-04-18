@@ -3,10 +3,14 @@
 use App\Http\Controllers\Controller;
 use LaravelLocalization;
 use Config;
+use Session;
+use Illuminate\Http\Request;
+use Cookie;
 
 class FrontendController extends Controller
 {
     public $data = array();
+    
     public function __construct()
     {
         $data['breadcrumb'] = 'Web受発注システム　＞　ホーム';
@@ -33,6 +37,11 @@ class FrontendController extends Controller
             $ipaddress = '';
 
         define('CLIENT_IP_ADRS', $ipaddress);
+        
+        //check login
+        $login = Cookie::get('userLogin');
+        if ( empty($login) || !$login ) {
+            return redirect()->route('front.login')->send();
+        }
     }
-
 }

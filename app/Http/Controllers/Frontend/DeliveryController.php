@@ -43,7 +43,7 @@ class DeliveryController extends FrontendController
     public function regist(Request $request)
     {
         $clsConstant                = new ConstantModel();
-        $data['constant']           = $clsConstant->getWEBMKB();
+        $data['webdkb']             = $clsConstant->getWEBDKB();
         if ($request->session()->has('delivery')) $request->session()->forget('delivery');
         $data['breadcrumb']      = 'Web受発注システム　＞　納入先リストの新規登録';
         return view('frontends.delivery.regist', $data);
@@ -93,6 +93,8 @@ class DeliveryController extends FrontendController
     */
     public function registConfirm(Request $request)
     {
+    	$clsConstant                = new ConstantModel();
+        $data['webdkb']             = $clsConstant->getWEBDKB();
         if (!$request->session()->has('delivery')) return redirect()->route('front.delivery.regist');
         $data['breadcrumb']      = 'Web受発注システム　＞　納入先リストの新規登録　＞　確認';
         if ($request->session()->has('delivery')) {
@@ -127,8 +129,10 @@ class DeliveryController extends FrontendController
     | get view delivery change
     |-----------------------------------
     */
-    public function change(Request $request, $id)
+    public function change($id, Request $request)
     {
+    	$clsConstant                = new ConstantModel();
+        $data['webdkb']             = $clsConstant->getWEBDKB();
         $data['breadcrumb']      = 'Web受発注システム　＞　登録済み納入先リストの変更';
         $clsDelivery             = new DeliveryModel();
         $data['delivery']        = $clsDelivery->get_by_id($id);
@@ -140,7 +144,7 @@ class DeliveryController extends FrontendController
     | post delivery change
     |-----------------------------------
     */
-    public function postChange(Request $request, $id)
+    public function postChange($id, Request $request)
     {
         $clsDelivery            = new DeliveryModel();
         $rules                  = $clsDelivery->Rules();
@@ -148,7 +152,7 @@ class DeliveryController extends FrontendController
         $validator = Validator::make(Input::all(), $rules, $clsDelivery->Messages());
 
         if ($validator->fails()) {
-            return redirect()->route('front.delivery.change')->withErrors($validator)->withInput();
+            return redirect()->route('front.delivery.change', $id)->withErrors($validator)->withInput();
         }
         $data['delivery_id']                = $id;
         $data['delivery_name']              = $request->input('delivery_name');
@@ -177,8 +181,10 @@ class DeliveryController extends FrontendController
     | get delivery change confirm
     |-----------------------------------
     */
-    public function changeConfirm(Request $request, $id)
+    public function changeConfirm($id, Request $request)
     {
+    	$clsConstant                = new ConstantModel();
+        $data['webdkb']             = $clsConstant->getWEBDKB();
         if (!$request->session()->has('delivery')) return redirect()->route('front.delivery.regist');
         $data['breadcrumb']      = 'Web受発注システム　＞　登録済み納入先リストの変更　＞　確認';
         if ($request->session()->has('delivery')) {
@@ -193,7 +199,7 @@ class DeliveryController extends FrontendController
     | post delivery change confirm
     |-----------------------------------
     */
-    public function postChangeConfirm(Request $request, $id)
+    public function postChangeConfirm($id, Request $request)
     {
         $clsDelivery            = new DeliveryModel();
        if ($request->session()->has('delivery')) {
@@ -215,8 +221,10 @@ class DeliveryController extends FrontendController
     | get view delivery detail
     |-----------------------------------
     */
-    public function detail(Request $request, $id)
+    public function detail($id, Request $request)
     {
+    	$clsConstant                = new ConstantModel();
+        $data['webdkb']             = $clsConstant->getWEBDKB();
         $data['breadcrumb']      = 'Web受発注システム　＞　登録済み納入先リストの詳細';
         $clsDelivery             = new DeliveryModel();
         $data['delivery']        = $clsDelivery->get_by_id($id);
@@ -230,6 +238,8 @@ class DeliveryController extends FrontendController
     */
     public function delete(Request $request, $id)
     {
+    	$clsConstant                = new ConstantModel();
+        $data['webdkb']             = $clsConstant->getWEBDKB();
         $data['breadcrumb']      = 'Web受発注システム　＞　登録済み納入先リストの削除（確認）　＞　確認';
         $clsDelivery             = new DeliveryModel();
         $data['delivery']        = $clsDelivery->get_by_id($id);
@@ -241,7 +251,7 @@ class DeliveryController extends FrontendController
     | post delivery delete
     |-----------------------------------
     */
-    public function postDelete(Request $request, $id)
+    public function postDelete($id, Request $request)
     {
         $data['last_kind']       = DELETE;
         $data['last_date']       = date('Y-m-d H:i:s');
@@ -253,6 +263,31 @@ class DeliveryController extends FrontendController
             } else {
                 return redirect()->route('front.delivery.detail',$id);
             }
+    }
+    
+    /*
+    |-----------------------------------
+    | set delivery address default
+    |-----------------------------------
+    */
+    public function addrsDefault($id, Request $request)
+    {
+    	$clsDelivery             = new DeliveryModel();
+    	$AddrsDefault			 = $clsDelivery->getAddrsDefault();
+    	if( !empty($AddrsDefault) ){
+    		foreach($AddrsDefault as $val){
+    			$delivery_id = $val->delivery_id;
+    			$clsDelivery->update($delivery_id, array('delivery_free2' => NULL));
+    		}
+    	}
+  		
+    	$data['delivery_free2']  = 1; //set address default
+        $data['last_date']       = date('Y-m-d H:i:s');
+        $data['last_ipadrs']     = CLIENT_IP_ADRS;
+        $data['last_user']       = Cookie::get('userLogin')['user_id'];
+        if ( $clsDelivery->update($id, $data) ) {
+        	return redirect()->route('front.delivery.index');
+        }
     }
 
 }

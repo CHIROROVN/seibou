@@ -100,7 +100,9 @@
         <tr>
           <td class="col-title">納品書同送<span class="red">(＊)</span></td>
           <td>
-            <input name="delivery_satisfy" value="2" type="radio" @if($delivery->delivery_free1 == '2') checked="" @elseif(old('delivery_satisfy') == '2') checked="" @endif >可　<input name="delivery_satisfy" value="1" @if($delivery->delivery_free1 == '1') checked="" @elseif(old('delivery_satisfy') == '1') checked="" @endif type="radio">否　
+            @foreach ( $webdkb as $item )
+            <input name="delivery_satisfy" value="{{ $item->ｺｰﾄﾞ }}" type="radio" @if(old('delivery_satisfy') == $item->ｺｰﾄﾞ) checked="" @elseif($delivery->delivery_free1 == $item->ｺｰﾄﾞ) checked="" @endif >{{ $item->名称 }}　
+            @endforeach
             @if ($errors->first('delivery_satisfy'))
             <div class="help-block with-errors">
             <ul class="list-unstyled"><li>{!! $errors->first('delivery_satisfy') !!}</li></ul></div>

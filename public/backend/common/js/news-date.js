@@ -1,4 +1,4 @@
-$(document).ready(function(){
+   $(document).ready(function(){
     var date = new Date();
     var year = date.getFullYear();
     var month    = date.getMonth()+1;
@@ -15,7 +15,7 @@ $(document).ready(function(){
       opthtml += '<option value="' + format2Digit(i) + '">'+ format2Digit(i) +'日</option>';
     }
     $('#day').html(opthtml);
-    $('#day option[value="' + format2Digit(oldDay) + '"]').prop('selected',true);
+    $('#day option[value="' + oldDay + '"]').prop('selected',true);
 
   });
 

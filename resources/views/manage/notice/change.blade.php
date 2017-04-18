@@ -58,6 +58,10 @@
                 <td class="col-title">詳細 <span class="red">(＊)</span></td>
                 <td>
                 <textarea name="news_contents" id="news_contents" style="height: 320px; width: 100%;">{{$notice->news_contents}}</textarea>
+                @if ($errors->first('news_contents'))
+                  <div class="help-block with-errors">
+                  <ul class="list-unstyled"><li>{!! $errors->first('news_contents') !!}</li></ul></div>
+                  @endif
                 </td>
               </tr>
               <tr>

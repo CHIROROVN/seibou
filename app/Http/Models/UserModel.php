@@ -61,7 +61,7 @@ class UserModel
 
         return array(
                 'old_pwd'                          => 'required|checkHashedPass:' . Auth::user()->u_passwd,
-                'new_pwd'                          => 'required|min:4',
+                'new_pwd'                          => 'required|min:5',
                 'conf_new_pwd'                     => 'same:new_pwd'
                 );
     }
